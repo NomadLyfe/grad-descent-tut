@@ -1,13 +1,12 @@
 import numpy as np
 
-x = np.random.random(100)
-y = 2*x + 6
-
+x = np.random.random(100) #array
+y = 2*x + 0.1 #array
+# cost_func = sum((y - yhat)**2) / n
 m = 0
 b = 0
 n = x.size
-print(n)
-learning_rate = 0.01
+learning_rate = 0.1
 
 def descend(x, y, m, b, learning_rate):
     ddm = 0
@@ -19,6 +18,9 @@ def descend(x, y, m, b, learning_rate):
     b = b - learning_rate*(ddb)*(1/n)
     return m, b
 
-for epoch in range(3000):
+for epoch in range(200):
     m, b = descend(x, y, m, b, learning_rate)
-    print(f'm: {m}, b: {b}')
+    yhat = m*x + b #array
+    cost_func = (y-yhat)**2 #array
+    loss = np.sum(cost_func) / n
+    print(f'Epoch {epoch} results: loss of {loss}, m of {m}, and b of {b}')
